@@ -14,7 +14,7 @@ export const goals = pgTable('goals', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
-  ownerId: text('owner')
+  ownerId: text('ownerId')
     .references(() => users.id)
     .notNull(),
   title: text('title').notNull(),

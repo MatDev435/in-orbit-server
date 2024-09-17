@@ -15,6 +15,13 @@
       "when": 1726586222580,
       "tag": "0001_clever_redwing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1726590480778,
+      "tag": "0002_careless_odin",
+      "breakpoints": true
     }
   ]
 }
