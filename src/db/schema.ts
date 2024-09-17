@@ -5,6 +5,7 @@ export const users = pgTable('users', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
+  name: text('name').notNull(),
   email: text('email').notNull().unique(),
   passwordHash: text('passwordHash').notNull(),
 })
@@ -34,3 +35,10 @@ export const goalCompletions = pgTable('goalCompletions', {
     .notNull()
     .defaultNow(),
 })
+
+export type User = typeof users.$inferSelect
+export type NewUser = typeof users.$inferInsert
+export type Goal = typeof goals.$inferSelect
+export type NewGoal = typeof goals.$inferInsert
+export type GoalCompletion = typeof goalCompletions.$inferSelect
+export type NewGoalCompletion = typeof goalCompletions.$inferInsert

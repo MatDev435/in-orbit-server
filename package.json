@@ -4,20 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch --env-file .env src/http/server.ts"
+    "dev": "tsx watch --env-file .env src/http/server.ts",
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest src/use-cases"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@biomejs/biome": "^1.9.1",
+    "@faker-js/faker": "^9.0.1",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.5.5",
     "drizzle-kit": "^0.24.2",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
+    "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.33.0",
     "fastify": "^4.28.1",
     "postgres": "^3.4.4",
