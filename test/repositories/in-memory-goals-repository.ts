@@ -14,6 +14,12 @@ export class InMemoryGoalsRepository implements GoalsRepository {
     return goal
   }
 
+  async save(goal: Goal): Promise<Goal> {
+    const itemIndex = this.items.findIndex(item => item.id === goal.id)
+
+    this.items[itemIndex] = goal
+  }
+
   async create(goal: NewGoal): Promise<Goal> {
     const newGoal = {
       ownerId: goal.ownerId,
