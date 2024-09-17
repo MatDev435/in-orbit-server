@@ -3,9 +3,9 @@ import fastify from 'fastify'
 const app = fastify()
 
 app.get('/', () => {
-    return 'Hello World!'
+  return 'Hello World!'
 })
 
 app.listen({ port: 3333 }).then(() => {
-    console.log('🔥 HTTP Server Running!')
+  console.log('🔥 HTTP Server Running!')
 })
