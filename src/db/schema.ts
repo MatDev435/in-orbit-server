@@ -28,6 +28,9 @@ export const goalCompletions = pgTable('goalCompletions', {
   id: text('id')
     .primaryKey()
     .$defaultFn(() => createId()),
+  completerId: text('completerId')
+    .references(() => users.id)
+    .notNull(),
   goalId: text('goalId')
     .references(() => goals.id)
     .notNull(),
