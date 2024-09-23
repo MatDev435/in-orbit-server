@@ -9,7 +9,7 @@ export interface FetchGoalsResponse {
 
 export interface GoalsRepository {
   findById(goalId: string): Promise<Goal | null>
-  fetchGoals(): Promise<FetchGoalsResponse[]>
+  fetchGoals(userId: string): Promise<FetchGoalsResponse[]>
   save(goal: Goal): Promise<Goal>
   create(goal: NewGoal): Promise<Goal>
   delete(goalId: string): Promise<void>

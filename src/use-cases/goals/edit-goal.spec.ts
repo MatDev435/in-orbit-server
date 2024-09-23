@@ -1,15 +1,20 @@
 import { makeGoal } from '../../../test/factories/make-goal.js'
+import { InMemoryGoalCompletionsRepository } from '../../../test/repositories/in-memory-goal-completions-repository.js'
 import { InMemoryGoalsRepository } from '../../../test/repositories/in-memory-goals-repository.js'
 import { NotAllowedError } from '../errors/not-allowed-error.js'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error.js'
 import { EditGoalUseCase } from './edit-goal.js'
 
+let inMemoryGoalCompletionsRepository: InMemoryGoalCompletionsRepository
 let inMemoryGoalsRepository: InMemoryGoalsRepository
 let sut: EditGoalUseCase
 
 describe('Create Goal Use Case', () => {
   beforeEach(() => {
-    inMemoryGoalsRepository = new InMemoryGoalsRepository()
+    inMemoryGoalCompletionsRepository = new InMemoryGoalCompletionsRepository()
+    inMemoryGoalsRepository = new InMemoryGoalsRepository(
+      inMemoryGoalCompletionsRepository
+    )
     sut = new EditGoalUseCase(inMemoryGoalsRepository)
   })
 

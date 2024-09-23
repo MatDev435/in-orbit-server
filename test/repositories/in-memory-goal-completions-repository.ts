@@ -33,8 +33,21 @@ export class InMemoryGoalCompletionsRepository
     return goalCompletion
   }
 
+  async fetchGoalCompletionsInWeek(userId: string): Promise<GoalCompletion[]> {
+    const firstDayOfWeek = dayjs().startOf('week').toDate()
+    const lastDayOfWeek = dayjs().endOf('week').toDate()
+
+    const goalCompletions = this.items.filter(
+      item =>
+        item.createdAt >= firstDayOfWeek && item.createdAt <= lastDayOfWeek
+    )
+
+    return goalCompletions
+  }
+
   async create(goalCompletion: NewGoalCompletion): Promise<GoalCompletion> {
     const newGoalCompletion = {
+      completerId: goalCompletion.completerId,
       goalId: goalCompletion.goalId,
     } as GoalCompletion
 

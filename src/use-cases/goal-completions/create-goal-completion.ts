@@ -6,7 +6,7 @@ import { NotAllowedError } from '../errors/not-allowed-error'
 import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface CreateGoalCompletionRequest {
-  ownerId: string
+  completerId: string
   goalId: string
 }
 
@@ -21,7 +21,7 @@ export class CreateGoalCompletionUseCase {
   ) {}
 
   async execute({
-    ownerId,
+    completerId,
     goalId,
   }: CreateGoalCompletionRequest): Promise<CreateGoalCompletionResponse> {
     const goal = await this.goalsRepository.findById(goalId)
@@ -30,7 +30,7 @@ export class CreateGoalCompletionUseCase {
       throw new ResourceNotFoundError()
     }
 
-    if (ownerId !== goal.ownerId) {
+    if (completerId !== goal.ownerId) {
       throw new NotAllowedError()
     }
 
@@ -42,6 +42,7 @@ export class CreateGoalCompletionUseCase {
     }
 
     const goalCompletion = await this.goalCompletionsRepository.create({
+      completerId,
       goalId: goal.id,
     })
 

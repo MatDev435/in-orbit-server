@@ -20,6 +20,7 @@ describe('Get Goal Use Case', () => {
   it('should be able to list goals', async () => {
     const goal = makeGoal({
       id: 'goal-01',
+      ownerId: 'user-01',
       title: 'New goal',
       desiredWeeklyFrequency: 2,
     })
@@ -27,11 +28,12 @@ describe('Get Goal Use Case', () => {
     inMemoryGoalsRepository.items.push(goal)
     inMemoryGoalCompletionsRepository.items.push({
       id: 'test',
+      completerId: 'user-01',
       goalId: goal.id,
       createdAt: new Date(),
     })
 
-    const { goals } = await sut.execute()
+    const { goals } = await sut.execute({ userId: 'user-01' })
 
     expect(goals).toEqual([
       expect.objectContaining({
@@ -53,7 +55,9 @@ describe('Get Goal Use Case', () => {
 
     inMemoryGoalsRepository.items.push(goal)
 
-    const { goals } = await sut.execute()
+    const { goals } = await sut.execute({
+      userId: 'user-01',
+    })
 
     expect(goals).toHaveLength(0)
   })

@@ -23,12 +23,12 @@ export class InMemoryGoalsRepository implements GoalsRepository {
     return goal
   }
 
-  async fetchGoals(): Promise<FetchGoalsResponse[]> {
+  async fetchGoals(userId: string): Promise<FetchGoalsResponse[]> {
     const lastDayOfWeek = dayjs().endOf('week').toDate()
 
-    const goalsCreatedUpToWeek = this.items.filter(
-      item => item.createdAt <= lastDayOfWeek
-    )
+    const goalsCreatedUpToWeek = this.items
+      .filter(item => item.createdAt <= lastDayOfWeek)
+      .filter(item => item.ownerId === userId)
 
     const result = goalsCreatedUpToWeek.map(goal => {
       return {

@@ -31,7 +31,7 @@ describe('Create Goal Use Case', () => {
     inMemoryGoalsRepository.items.push(goal)
 
     const { goalCompletion } = await sut.execute({
-      ownerId: 'user-01',
+      completerId: 'user-01',
       goalId: goal.id,
     })
 
@@ -41,7 +41,7 @@ describe('Create Goal Use Case', () => {
   it('should not be able to create a goal completion from an inexistent goal', async () => {
     await expect(() =>
       sut.execute({
-        ownerId: 'user-01',
+        completerId: 'user-01',
         goalId: 'inexistent-goal-id',
       })
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
@@ -56,7 +56,7 @@ describe('Create Goal Use Case', () => {
 
     await expect(() =>
       sut.execute({
-        ownerId: 'user-02',
+        completerId: 'user-02',
         goalId: goal.id,
       })
     ).rejects.toBeInstanceOf(NotAllowedError)
@@ -76,7 +76,7 @@ describe('Create Goal Use Case', () => {
 
     await expect(() =>
       sut.execute({
-        ownerId: 'user-01',
+        completerId: 'user-01',
         goalId: goal.id,
       })
     ).rejects.toBeInstanceOf(GoalAlreadyCompletedError)
